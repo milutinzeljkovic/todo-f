@@ -3,16 +3,16 @@
         <h1>Todo</h1>
         <div v-if="user.email !== undefined">
             <ul id="menu">
-                <li><router-link to = '/todos'>Todos</router-link></li>
-                <li><router-link to = '/todos/add'>Add todo</router-link></li>
-                <li><router-link to = '/user'>{{user.email}}</router-link></li>
+                <li><router-link :to="{name: 'todos_route'}">Todos</router-link></li>
+                <li><router-link :to="{name: 'todos_route_add'}">Add todo</router-link></li>
+                <li><router-link :to="{name: 'user_route'}">{{user.email}}</router-link></li>
                 <li><a @click = "logout()">Log out</a></li>
             </ul>  
         </div>
         <div v-else>
             <ul id="menu">
-                <li><router-link to = '/login'>Login</router-link></li>
-                <li><router-link to = '/register'>Register</router-link></li>
+                <li><router-link :to="{name: 'login_route'}">Login</router-link></li>
+                <li><router-link :to="{name: 'register_route'}">Register</router-link></li>
             </ul>  
         </div>
     </div>
@@ -20,26 +20,25 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-const TODO_ROUTE = '/todos';
+import routeNames from './route_names'
 
 export default {
     name: 'Header',
     methods: {
-        ...mapActions(['fetchCurrentUser', 'loginUser', 'logoutUser']),
+        ...mapActions([ 'loginUser', 'logoutUser']),
         logout(){
             this.logoutUser();
             this.$router.push('/login');
 
         }
     },
+    data() {
+        return {
+            routeNames
+        }
+    },
 
     computed: mapGetters(['user']),
-
-
-
-    created() {
-        this.fetchCurrentUser({});
-    }
 }
 </script>
 

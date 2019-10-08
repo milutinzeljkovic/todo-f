@@ -1,6 +1,6 @@
 <template>
     <div class = 'login div'>
-        <form v-on:submit.prevent='onLoginFormSubmit($event)'> 
+        <form @submit.prevent='onLoginFormSubmit($event)'> 
             <label for="femail">Email</label>
             <input type="text" id="femail" name="email" v-model="usersData.email" placeholder="Your email..">
 
@@ -32,9 +32,7 @@ export default {
                 email: this.usersData.email,
                 password: this.usersData.password
             }
-            await this.loginUser(userObj);
-            console.log(this.$store.state.users.token);
-                        
+            await this.loginUser(userObj);                        
             this.$router.push('/todos');
         },
         computed: mapGetters(['token', 'user']),

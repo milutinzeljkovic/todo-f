@@ -7,11 +7,18 @@
 
 <script>
 import Header from './components/Header';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'app',
+  methods: {
+    ...mapActions(['fetchCurrentUser'])
+  },
   components: {
     Header
+  },
+  created(){
+    this.fetchCurrentUser();
   }
 }
 </script>

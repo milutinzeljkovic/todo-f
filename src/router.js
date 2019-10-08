@@ -3,31 +3,31 @@ import Router from 'vue-router';
 import Register from './components/Register';
 import Todos from './components/Todos';
 import Login from './components/Login';
-
+import routes from './components/route_names'; 
 Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
     routes: [
       {
-        path: '/todos',
-        name: 'todos',
+        path: routes.TODO_ROUTE.path,
+        name: routes.TODO_ROUTE.name,
         component: Todos,
         meta: {
           requiresAuth: true
         }
       },
       {
-        path: '/register',
-        name: 'register',
+        path: routes.REGISTER_ROUTE.path,
+        name: routes.REGISTER_ROUTE.name,
         component: Register,
         meta: {
           requiresAuth: false
         }
       },
       {
-        path: '/login',
-        name: 'login',
+        path: routes.LOGIN_ROUTE.path,
+        name: routes.LOGIN_ROUTE.name,
         component: Login,
         meta: {
           requiresAuth: false
@@ -37,16 +37,12 @@ const router = new Router({
   })
 
   router.beforeEach((to, from, next) => {
-    if(to.meta.requiresAuth){
-      if(!localStorage.getItem('token'))
-        next('/login');
-      else{
-        next();
-      }
-    }
-    else{
+
+    if(!localStorage.getItem('token') && to.meta.requiresAuth)
+      next('/login');
+    else
       next();
-    }
+    
   })
 
   export default router;

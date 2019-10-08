@@ -32,14 +32,10 @@ const actions = {
     },
     async loginUser({ commit }, user) {
 
-        var bodyFormData = new FormData();
-        bodyFormData.set('email', user.email);
-        bodyFormData.set('password', user.password);
-
         let response;
         try{
             response = await axios.post(
-                'http://localhost:8000/api/auth/login',bodyFormData
+                'http://localhost:8000/api/auth/login',user
             );
 
         }catch(e){
@@ -60,14 +56,13 @@ const actions = {
                 'http://localhost:8000/api/auth/logout',
                 {},
                 config
-                
-
             );
-
+            
         }catch(e){
 
         }
         commit('logoutUser', response.data);
+        
     }
 };
 
@@ -80,7 +75,7 @@ const mutations = {
         state.user = data.user;
         localStorage.setItem('token',data.access_token);
     },
-    logoutUser: (state,data) => {
+    logoutUser: (state) => {
         state.token = null;
         state.user = {};
         localStorage.clear();

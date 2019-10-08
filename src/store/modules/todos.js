@@ -32,14 +32,7 @@ const mutations = {
         state.todos = todos
     },
     deleteTodo: (state, id) => {
-        let index;
-        let cnt = 0;
-        state.todos.forEach(todo => {
-            if(todo.id === id){
-                index = cnt;
-            }
-            cnt++;
-        });
+        const index = state.todos.findIndex(todo => todo.id === id);
         state.todos.splice(index,1);
     },
 };
