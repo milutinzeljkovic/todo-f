@@ -6,7 +6,7 @@
                 <li><router-link to = '/todos'>Todos</router-link></li>
                 <li><router-link to = '/todos/add'>Add todo</router-link></li>
                 <li><router-link to = '/user'>{{user.email}}</router-link></li>
-                <li><router-link to = '/logout'>Log out</router-link></li>
+                <li><a @click = "logout()">Log out</a></li>
             </ul>  
         </div>
         <div v-else>
@@ -19,16 +19,23 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+const TODO_ROUTE = '/todos';
 
 export default {
     name: 'Header',
     methods: {
-        ...mapActions(['fetchCurrentUser', 'loginUser']),
+        ...mapActions(['fetchCurrentUser', 'loginUser', 'logoutUser']),
+        logout(){
+            this.logoutUser();
+            this.$router.push('/login');
+
+        }
     },
-    computed: mapState({
-        user: state => state.users.user
-    }),
+
+    computed: mapGetters(['user']),
+
+
 
     created() {
         this.fetchCurrentUser({});

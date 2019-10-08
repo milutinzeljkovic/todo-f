@@ -43,9 +43,31 @@ const actions = {
             );
 
         }catch(e){
-
+            
         }
         commit('loginUser', response.data);
+    },
+    async logoutUser( { commit }) {
+
+        const token = localStorage.getItem('token'); 
+        var config = {
+            headers: {Authorization: `Bearer ${token}`}
+        };
+
+        let response;
+        try{
+            response = await axios.post(
+                'http://localhost:8000/api/auth/logout',
+                {},
+                config
+                
+
+            );
+
+        }catch(e){
+
+        }
+        commit('logoutUser', response.data);
     }
 };
 
@@ -55,7 +77,13 @@ const mutations = {
     },
     loginUser: (state, data) => {
         state.token = data.access_token;
+        state.user = data.user;
         localStorage.setItem('token',data.access_token);
+    },
+    logoutUser: (state,data) => {
+        state.token = null;
+        state.user = {};
+        localStorage.clear();
     }
 };
 

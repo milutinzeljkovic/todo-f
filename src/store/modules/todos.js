@@ -10,14 +10,7 @@ const getters = {
 };
 
 const actions = {
-    async fetchCurrentUser({ commit }) {
-        const response = await axios.post(
-            'http://localhost:8000/api/auth/me'
-        );
-
-        commit('setUser', response);
-    },
-
+    
     async fetchTodos({ commit }) {
         const response = await axios.get(
             `${ROOT_URL}/todos`

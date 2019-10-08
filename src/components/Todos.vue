@@ -22,7 +22,7 @@ export default {
         onDeleteClickHandler(id){            
             this.deleteTodo(id);
             
-        }
+        },
     },
     computed: mapGetters(['allTodos']),
     created() {
