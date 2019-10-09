@@ -5,7 +5,11 @@
             <div v-for="todo in allTodos" :key="todo.id" class="todo">
                 {{todo.title}}
                 <div>
+                  <div class = 'bottom-right'>
+                    <button >edit</button>
                     <button v-on:click="onDeleteClickHandler(todo.id)">delete</button>
+                  </div>
+                   
                 </div>
             </div>
         </div>
@@ -18,7 +22,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'Todos',
     methods: {
-        ...mapActions(['fetchTodos', 'deleteTodo']),
+        ...mapActions(['fetchTodos', 'deleteTodo', 'fetchCurrentUser']),
         onDeleteClickHandler(id){            
             this.deleteTodo(id);
             
@@ -27,6 +31,7 @@ export default {
     computed: mapGetters(['allTodos']),
     created() {
         this.fetchTodos();
+        this.fetchCurrentUser();
     }
 }
 </script>
@@ -74,6 +79,12 @@ i {
   background: #35495e;
   color: #fff;
 }
+.bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 @media (max-width: 500px) {
   .todos {
     grid-template-columns: 1fr;

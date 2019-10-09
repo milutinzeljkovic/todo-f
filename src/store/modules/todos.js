@@ -1,5 +1,5 @@
 import axios from 'axios';
-const ROOT_URL = 'https://jsonplaceholder.typicode.com';
+const ROOT_URL = 'http://localhost:8000/api';
 
 const state = {
     todos: []
@@ -11,9 +11,17 @@ const getters = {
 
 const actions = {
     
+    
     async fetchTodos({ commit }) {
+
+        const token = localStorage.getItem('token'); 
+        var config = {
+            headers: {Authorization: `Bearer ${token}`}
+        };
+
         const response = await axios.get(
-            `${ROOT_URL}/todos`
+            `${ROOT_URL}/todos`,
+            config
         );
 
         commit('setTodos', response.data);

@@ -39,6 +39,13 @@ export default {
     },
 
     computed: mapGetters(['user']),
+<<<<<<< HEAD
+=======
+
+    created() {
+        this.fetchCurrentUser({});
+    }
+>>>>>>> register_branch
 }
 </script>
 
