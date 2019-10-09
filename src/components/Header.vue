@@ -25,7 +25,7 @@ import routeNames from './route_names'
 export default {
     name: 'Header',
     methods: {
-        ...mapActions([ 'loginUser', 'logoutUser']),
+        ...mapActions([ 'loginUser', 'logoutUser', 'fetchCurrentUser']),
         logout(){
             this.logoutUser();
             this.$router.push('/login');
