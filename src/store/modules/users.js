@@ -47,6 +47,20 @@ const actions = {
         }
         commit('loginUser', response.data);
     },
+    async registerUser({ commit }, user){
+        
+        let response;
+        try{
+            response = await axios.post(
+                'http://localhost:8000/api/auth/register',user
+            );
+
+        }catch(e){
+            
+        }
+        commit('registerUser', response.data);
+    },
+
     async logoutUser( { commit }) {
 
         const token = localStorage.getItem('token'); 
@@ -84,6 +98,12 @@ const mutations = {
         state.token = null;
         state.user = {};
         localStorage.clear();
+    },
+    registerUser: (state, data) => {
+        state.token = data.access_token,
+        state.user = data.user,
+        localStorage.setItem('token',data.access_token);
+
     }
 };
 

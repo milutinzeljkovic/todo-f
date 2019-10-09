@@ -35,8 +35,6 @@ export default {
 
     computed: mapGetters(['user']),
 
-
-
     created() {
         this.fetchCurrentUser({});
     }
