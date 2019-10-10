@@ -1,6 +1,8 @@
+import { RepositoryFactory } from '../../repositories/RepositoryFactory';
 import axios from 'axios';
-import { async } from 'q';
+const TodosRepository = RepositoryFactory.get('todos');
 const ROOT_URL = 'http://localhost:8000/api';
+
 
 const state = {
     todos: [],
@@ -18,8 +20,6 @@ const getters = {
 };
 
 const actions = {
-    
-    
     async fetchTodos({ commit }) {
 
         const token = localStorage.getItem('token'); 
@@ -100,9 +100,6 @@ const actions = {
             commit('todoSelected', todo);
         }
     }
-
-
-
 };
 
 const mutations = {

@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { RepositoryFactory } from '../../repositories/RepositoryFactory';
+const UsersRepository = RepositoryFactory.get('users');
+
 
 const state = {
     user: {},
@@ -85,7 +88,7 @@ const mutations = {
         state.user = data;
     },
     loginUser: (state, data) => {
-        state.token = data.access_token;
+        state.token = data.access_token;        
         state.user = data.user;
         localStorage.setItem('token',data.access_token);
     },
