@@ -1,8 +1,5 @@
 import { RepositoryFactory } from '../../repositories/RepositoryFactory';
-import axios from 'axios';
 const todosRepo = RepositoryFactory.get('todos');
-const ROOT_URL = 'http://localhost:8000/api';
-
 
 const state = {
     todos: [],
@@ -20,9 +17,7 @@ const getters = {
 };
 
 const actions = {
-    async fetchTodos({ commit }) {
-        console.log('fecovanje');
-        
+    async fetchTodos({ commit }) {        
         const response = await todosRepo.get();
         commit('setTodos', response.data);
     },
@@ -65,15 +60,11 @@ const mutations = {
         state.todos = todos
     },
     deleteTodo: (state, id) => {
-        const index = state.todos.findIndex(todo => todo.id === id);
-        console.log('index to delte',index);
-        
+        const index = state.todos.findIndex(todo => todo.id === id);        
         state.todos.splice(index,1);
     },
     todoCompleted: (state,id) =>{
-        const index = state.todos.findIndex(todo => todo.id === id);
-        console.log('index',index);
-        
+        const index = state.todos.findIndex(todo => todo.id === id);        
         state.todos[index].comleted = 1;
     },
     todoSelected: (state,todo) => {
@@ -88,8 +79,6 @@ const mutations = {
             description: '',
             priority:''
         };
-
-
     }
 };
 

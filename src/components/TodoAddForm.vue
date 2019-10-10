@@ -146,5 +146,11 @@ input[type=text], select {
     .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
     }
+@media (max-width: 500px) {
+      form{
+        width: 90%;
+        margin-left: 5%;
+    }
+}
 
 </style>

@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <h1>Todo</h1>
+    <div class = 'header'>
         <div v-if="user.email !== undefined">
             <ul id="menu">
                 <li><router-link :to="{name: 'todos_route'}">Todos</router-link></li>
@@ -58,6 +57,10 @@ export default {
 
     li {
     float: left;
+    }
+
+    .header{
+        margin-top: 1%;
     }
 
     li a {
