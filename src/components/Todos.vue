@@ -48,6 +48,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { delay } from 'q';
 
 export default {
     name: 'Todos',
@@ -56,8 +57,8 @@ export default {
         onDeleteClickHandler(id){            
             this.deleteTodo(id);
         },
-        onCheckBoxChecked(todo){          
-          this.completeTodo(todo);
+        onCheckBoxChecked(todo){
+            this.completeTodo(todo)
         },
         onEditButtonClick(todo){
           this.todoData = {...todo};
@@ -102,6 +103,7 @@ export default {
   padding: 1rem;
   border-radius: 5px;
   text-align: center;
+  height: 90%;
   position: relative;
   cursor: pointer;
 }
@@ -110,9 +112,16 @@ export default {
   background: #898a8a;
   padding: 1rem;
   border-radius: 5px;
+  height: 90%;
   text-align: center;
   position: relative;
   cursor: pointer;
+}
+.edit{
+  color:rgb(0, 174, 255)
+}
+.delete{
+  color:red;
 }
 .high{
   color: red;
@@ -171,6 +180,7 @@ i {
 button {
   background-color: #4CAF50; /* Green */
   border-radius: 12px;
+  cursor: pointer;
   border: none;
   color: white;
   padding: 7px 20px;
@@ -181,9 +191,18 @@ button {
 }
 
 .button2 {
-  background-color: #008CBA;
+  background-color:rgb(113, 192, 105)
   } /* Blue */
-.button3 {background-color: #f44336;} /* Red */
+.button2:hover{
+    background-color:rgb(197, 206, 195)
+
+}
+
+.button3 {background-color:#eb3b3b} /* Red */
+
+.button3:hover{
+  background-color:rgb(235, 173, 173);
+}
 
 .container {
   display: block;
