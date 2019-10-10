@@ -2,17 +2,23 @@ import Repository from './Repository';
 
 const resource = '/auth';
 
-export default {
+class UsersRepository extends Repository{
     login(user) {
-        return Repository.post(`${resource}/login`, user);
-    },
+        return this.getApiClient().post(`${resource}/login`, user);
+    }
+
     register(user) {
-        return Repository.post(`${resource}/register`, user);
-    },
+        return this.getApiClient().post(`${resource}/register`, user);
+    }
+
     fetchCurrentUser() {
-        return Repository.post(`${resource}/me`);
-    },
+        return this.getApiClient().post(`${resource}/me`);
+    }
+
     logoutUser() {
-        return Repository.post(`${resource}/logout`);
+        return this.getApiClient().post(`${resource}/logout`);
     }
 }
+
+
+export default UsersRepository;

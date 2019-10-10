@@ -2,21 +2,23 @@ import Repository from './Repository';
 
 const resource = '/todos';
 
-export default {
+class TodosRepository extends Repository{
     get() {
-        return Repository.get(`${resource}`);
-    },
-    getTodo(todoId) {
-        return Repository.get(`${resource}/${todoId}`);
-    },
-    createTodo(todo) {
-        return Repository.post(`${resource}/add`, todo);
-    },
-    updateTodo(todo) {
-        return Repository.put(`${resource}/${todo.id}`,todo);
-    },
-    deleteTodo(id) {
-        return Repository.delete(`${resource}/${id}`);
+        return this.getApiClient().get(`${resource}`);
     }
-
+    getTodo(todoId) {
+        return this.getApiClient().get(`${resource}/${todoId}`);
+    }
+    createTodo(todo) {
+        return this.getApiClient().post(`${resource}/add`, todo);
+    }
+    updateTodo(todo) {
+        return this.getApiClient().put(`${resource}/${todo.id}`,todo);
+    }
+    deleteTodo(id) {
+        return this.getApiClient().delete(`${resource}/${id}`);
+    }
 }
+
+export default TodosRepository;
+

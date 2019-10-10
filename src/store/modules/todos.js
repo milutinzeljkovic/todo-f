@@ -1,6 +1,6 @@
 import { RepositoryFactory } from '../../repositories/RepositoryFactory';
 import axios from 'axios';
-const TodosRepository = RepositoryFactory.get('todos');
+const todosRepo = RepositoryFactory.get('todos');
 const ROOT_URL = 'http://localhost:8000/api';
 
 
@@ -21,71 +21,29 @@ const getters = {
 
 const actions = {
     async fetchTodos({ commit }) {
-
-        const token = localStorage.getItem('token'); 
-        let config = {
-            headers: {Authorization: `Bearer ${token}`}
-        };
-
-        const response = await axios.get(
-            `${ROOT_URL}/todos`,
-            config
-        );
-
+        console.log('fecovanje');
+        
+        const response = await todosRepo.get();
         commit('setTodos', response.data);
     },
 
     async deleteTodo({ commit },id) {
-        const token = localStorage.getItem('token'); 
-        let config = {
-            headers: {Authorization: `Bearer ${token}`}
-        };
-        const response = await axios.delete(
-            `${ROOT_URL}/todos/${id}`,
-            config
-        );
+        const response = await todosRepo.deleteTodo(id);
         commit('deleteTodo', id);
     },
 
     async addTodo({ commit }, todo) {
-        const token = localStorage.getItem('token'); 
-        let config = {
-            headers: {Authorization: `Bearer ${token}`}
-        };
-        const response = await axios.post(
-            `${ROOT_URL}/todos/add`,
-            todo,
-            config
-        );
+        const response = await todosRepo.createTodo(todo);
     },
 
     async updateTodo({ commit },todo) {
-        const token = localStorage.getItem('token'); 
-        let config = {
-            headers: {Authorization: `Bearer ${token}`}
-        };
-        
-        const response = await axios.put(
-            `${ROOT_URL}/todos/${todo.id}`,
-            todo,
-            config
-        );
+        const response = await todosRepo.updateTodo(todo);
         commit('todoUpdated', response.data[0]);
     },
 
     async completeTodo({ commit },todo) {
-        const token = localStorage.getItem('token'); 
-        let config = {
-            headers: {Authorization: `Bearer ${token}`}
-        };
         todo.completed = 1;
-        const response = await axios.put(
-            `${ROOT_URL}/todos/${todo.id}`,
-            todo,
-            config
-        );
-        console.log(response.data);
-        
+        const response = await todosRepo.updateTodo(todo);        
         commit('todoCompleted', response.data[0].id);
     },
     selectTodo({ commit }, todo) {

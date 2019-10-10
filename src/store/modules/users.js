@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { RepositoryFactory } from '../../repositories/RepositoryFactory';
-const UsersRepository = RepositoryFactory.get('users');
+const usersRepo = RepositoryFactory.get('users');
 
 
 const state = {
@@ -15,18 +15,9 @@ const getters = {
 
 const actions = {
     async fetchCurrentUser({ commit }) {     
-        const token = localStorage.getItem('token'); 
-        var config = {
-            headers: {Authorization: `Bearer ${token}`}
-        };
         let response;
         try{
-            response = await axios.post(
-                'http://localhost:8000/api/auth/me',
-                {},
-                config
-                
-            );
+            response = await usersRepo.fetchCurrentUser();
             commit('setUser', response.data);
 
         }catch(e){
@@ -37,9 +28,7 @@ const actions = {
 
         let response;
         try{
-            response = await axios.post(
-                'http://localhost:8000/api/auth/login',user
-            );
+            response = await usersRepo.login(user);
 
         }catch(e){
             
@@ -50,9 +39,7 @@ const actions = {
         
         let response;
         try{
-            response = await axios.post(
-                'http://localhost:8000/api/auth/register',user
-            );
+            response = await usersRepo.register(user);
 
         }catch(e){
             
@@ -62,18 +49,10 @@ const actions = {
 
     async logoutUser( { commit }) {
 
-        const token = localStorage.getItem('token'); 
-        var config = {
-            headers: {Authorization: `Bearer ${token}`}
-        };
 
         let response;
         try{
-            response = await axios.post(
-                'http://localhost:8000/api/auth/logout',
-                {},
-                config
-            );
+            response = await usersRepo.logoutUser();
             
         }catch(e){
 
