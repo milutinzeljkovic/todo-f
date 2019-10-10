@@ -126,7 +126,7 @@ const mutations = {
     },
     todoUpdated: (state,newTodo) =>{
         const index = state.todos.findIndex(todo => todo.id === newTodo.id);        
-        state.todos[index] = newTodo;
+        state.todos.splice(index, 1, newTodo);
         state.selectedTodo = {
             id:-1,
             title:'',

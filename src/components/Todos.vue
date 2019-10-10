@@ -55,13 +55,8 @@ export default {
           this.completeTodo(todo);
         },
         onEditButtonClick(todo){
-          this.todoData.id = todo.id;
-          this.todoData.title = todo.title;
-          this.todoData.description = todo.description;
-          this.todoData.priority = todo.priority;
-          this.todoData.completed = todo.completed;
-          this.selectTodo(todo);
-          
+          this.todoData = {...todo};
+          this.selectTodo(todo); 
         },
         onEditTodoSubmit(){
           this.updateTodo(this.todoData);

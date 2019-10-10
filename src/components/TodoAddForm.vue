@@ -1,6 +1,6 @@
 <template>
     <div class = 'addtodo div'>
-        <form @submit.prevent='onAddTodoFormSubmit()' > 
+        <form @submit.prevent='onAddTodoFormSubmit'> 
             <label for="ftitle">Title</label>
             <input type="text" id="ftitle" name="title" v-model="todoData.title" placeholder="title">
             
@@ -9,13 +9,11 @@
             
             <label for="fprioriyt">Priority</label>
             <select id='fprioriyt' v-model="todoData.priority">
-                <option value="0">Select priority:</option>
-                <option value="1">high</option>
-                <option value="2">medium</option>
-                <option value="3">low</option>
-
+                <option value="no priority">Select priority:</option>
+                <option value="high">high</option>
+                <option value="medium">medium</option>
+                <option value="low">low</option>
             </select>
-
             <input type="submit" value="Submit">
         </form>
     </div>
@@ -40,21 +38,13 @@ export default {
     methods:{
         ...mapActions(['addTodo']),
         async onAddTodoFormSubmit(){
-            const priorities = [
-                '',
-                'high',
-                'medium',
-                'low'
-            ];
             const todoObj = {
                 title: this.todoData.title,
                 description: this.todoData.description,
-                priority: priorities[this.todoData.priority]
+                priority: this.todoData.priority
             };
             await this.addTodo(todoObj);
-            this.$router.push('/todos');
-                        
-                        
+            this.$router.push('/todos');          
         }
     }
     
