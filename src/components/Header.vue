@@ -2,16 +2,16 @@
     <div class = 'header'>
         <div v-if="user.email !== undefined">
             <ul id="menu">
-                <li><router-link :to="{name: 'todos_route'}">Todos</router-link></li>
-                <li><router-link :to="{name: 'todos_route_add'}">Add todo</router-link></li>
-                <li><router-link :to="{name: 'user_route'}">{{user.email}}</router-link></li>
-                <li><a @click = "logout()">Log out</a></li>
+                <li><router-link :to="{name: 'todos_route'}" class="white">Todos</router-link></li>
+                <li><router-link :to="{name: 'todos_route_add' }" class="white" >Add todo</router-link></li>
+                <li><router-link :to="{name: 'user_route'}" class="white" >{{user.email}}</router-link></li>
+                <li><a @click = "logout()" class="white" >Log out</a></li>
             </ul>  
         </div>
         <div v-else>
             <ul id="menu">
-                <li><router-link :to="{name: 'login_route'}">Login</router-link></li>
-                <li><router-link :to="{name: 'register_route'}">Register</router-link></li>
+                <li><router-link :to="{name: 'login_route'}" class="white" >Login</router-link></li>
+                <li><router-link :to="{name: 'register_route'}" class="white" >Register</router-link></li>
             </ul>  
         </div>
     </div>
@@ -52,7 +52,11 @@ export default {
     padding: 0;
     overflow: hidden;
     border: 1px solid #e7e7e7;
-    background-color: #f3f3f3;
+    background-color: #41b883;
+    }
+    .white{
+        color: white;
+        font-weight: bold;
     }
 
     li {

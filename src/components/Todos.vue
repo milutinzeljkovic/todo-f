@@ -16,18 +16,24 @@
                   </select>
 
                   <input type="submit" value="Submit">
-                  <button @click="onCancelButtonClick">cancel</button>
+                  <button @click="onCancelButtonClick" class='button3'>cancel</button>
                 </form>
               </div>
               <div v-else>
                 <label class="container">
-                  <h2>{{todo.title}}</h2>
+                  <h2 class = 'white'>{{todo.title}}</h2>
                   <input type="checkbox" v-if="todo.completed === 1" checked>
                   <input type = "checkbox" v-else v-on:click="onCheckBoxChecked(todo)"/>
                   <span class="checkmark"></span>
                 </label>
-                <p>{{todo.description}}</p>
-                <p>priority: {{todo.priority}}</p>
+                <p class = 'white'>{{todo.description}}</p>
+                <label>
+                  <p 
+                    :class="[todo.priority]"
+                    >
+                    {{todo.priority}}
+                  </p>
+                </label>
                 <div>
                   <div class = 'bottom-right'>
                     <button @click="onEditButtonClick(todo)" class="button2" >edit</button>
@@ -49,7 +55,6 @@ export default {
         ...mapActions(['fetchTodos', 'deleteTodo', 'fetchCurrentUser', 'completeTodo', 'selectTodo','updateTodo']),
         onDeleteClickHandler(id){            
             this.deleteTodo(id);
-            
         },
         onCheckBoxChecked(todo){          
           this.completeTodo(todo);
@@ -60,7 +65,6 @@ export default {
         },
         onEditTodoSubmit(){
           this.updateTodo(this.todoData);
-          
         },
         onCancelButtonClick(){
           this.selectTodo({});
@@ -109,6 +113,25 @@ export default {
   text-align: center;
   position: relative;
   cursor: pointer;
+}
+.high{
+  color: red;
+  font-weight: bold;
+}
+.medium{
+  color: yellow;
+  font-weight: bold;
+
+}
+
+.white{
+  color: white;
+}
+
+.low{
+  color:yellowgreen;
+  font-weight: bold;
+
 }
 
 i {
@@ -173,7 +196,6 @@ button {
   user-select: none;
 }
 
-/* Hide the browser's default checkbox */
 .container input {
   position: absolute;
   opacity: 0;
@@ -182,7 +204,6 @@ button {
   width: 0;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -192,29 +213,25 @@ button {
   background-color: #eee;
 }
 
-/* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
-/* When the checkbox is checked, add a blue background */
+
 .container input:checked ~ .checkmark {
   background-color: #2196F3;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
   display: block;
 }
 
-/* Style the checkmark/indicator */
 .container .checkmark:after {
   left: 9px;
   top: 5px;
