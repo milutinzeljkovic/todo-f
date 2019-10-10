@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class = 'background'>
     <Header/>
     <router-view/>
   </div>
@@ -31,5 +31,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.background{
+  color: rgb(204, 203, 203)
 }
 </style>
