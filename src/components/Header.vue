@@ -2,9 +2,10 @@
     <div class = 'header'>
         <div v-if="user.email !== undefined">
             <ul id="menu">
-                <li><router-link :to="{name: 'todos_route'}" class="white">Todos</router-link></li>
+                <li><router-link :to="{name: 'todos_route'}" class="white" >
+                    Todos
+                    </router-link></li>
                 <li><router-link :to="{name: 'todos_route_add' }" class="white" >Add todo</router-link></li>
-                <li><router-link :to="{name: 'user_route'}" class="white" >{{user.email}}</router-link></li>
                 <li><a @click = "logout()" class="white" >Log out</a></li>
             </ul>  
         </div>
@@ -64,7 +65,7 @@ export default {
     }
 
     .header{
-        margin-top: 1%;
+        margin-top: -4%;
     }
 
     li a {

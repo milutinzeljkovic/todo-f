@@ -41,7 +41,8 @@ export default {
             const todoObj = {
                 title: this.todoData.title,
                 description: this.todoData.description,
-                priority: this.todoData.priority
+                priority: this.todoData.priority,
+                completed: 0
             };
             await this.addTodo(todoObj);
             this.$router.push('/todos');          

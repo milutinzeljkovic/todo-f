@@ -1,5 +1,8 @@
 <template>
     <div>
+      <div class='todosHeader'>
+        <img src = '../assets/flame.svg' height="100%" id='flame_icon'/>
+      </div>
         <div class="todos">
             <div v-for="todo in allTodos" :key="todo.id" class="todo" v-bind:class="{'completed':todo.completed}">
               <div v-if="selectedTodo.id === todo.id">
@@ -16,7 +19,7 @@
                   </select>
 
                   <input type="submit" value="Submit">
-                  <button @click="onCancelButtonClick" class='button3'>cancel</button>
+                  <button @click="onCancelButtonClick" class='button3'><small class ='deletesmall'>cancel</small></button>
                 </form>
               </div>
               <div v-else>
@@ -34,12 +37,12 @@
                     {{todo.priority}}
                   </p>
                 </label>
-                <div>
-                  <div class = 'bottom-right'>
-                    <button @click="onEditButtonClick(todo)" class="button2" >edit</button>
-                    <button v-on:click="onDeleteClickHandler(todo.id)" class="button3" >delete</button>
+                  <div class = 'bottom-right' display:inline float:left>
+                    <div class ='bottom' display:inline float:left> 
+                      <button class='button3edit'  @click="onEditButtonClick(todo)" ><small class ='editsmall'>edit</small></button>
+                       <button class='button3delte'  @click="onDeleteClickHandler(todo.id)" ><small class ='deletesmall'>delete</small></button>
+                    </div>
                   </div>
-                </div>
               </div>
             </div>
         </div>
@@ -48,6 +51,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import DeleteIcon from '../assets/icons8-trash-can.svg'
 import { delay } from 'q';
 
 export default {
@@ -70,6 +74,9 @@ export default {
         onCancelButtonClick(){
           this.selectTodo({});
         }
+    },
+    components: {
+      DeleteIcon
     },
     data(){
       return{
@@ -95,7 +102,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
-  margin-top: 5%;
+  margin-top: 1%;
 }
 .todo {
   border: 1px solid #ccc;
@@ -120,6 +127,22 @@ export default {
 .edit{
   color:rgb(0, 174, 255)
 }
+.edit_div{
+  display: inline;
+  float: left;
+  width: 20%;
+  margin-left: 10%;
+}
+#edit_small{
+  cursor: pointer;
+}
+
+.delete_div{
+    display: inline;
+    margin-left: 40%;
+    cursor: pointer;
+  float: left;
+}
 .delete{
   color:red;
 }
@@ -132,13 +155,18 @@ export default {
   font-weight: bold;
 
 }
-
+.todosHeader{
+  height: 50px;
+  background: #f15033;
+  margin-top: 5%;
+}
 .white{
   color: white;
+  
 }
 
 .low{
-  color:yellowgreen;
+  color:green;
   font-weight: bold;
 
 }
@@ -174,7 +202,30 @@ i {
 .bottom-right {
     position: absolute;
     bottom: 0;
+    width: 50%;
+    margin-bottom: 0.5%;
+
+      border-radius: 20px;
+
+    margin-left: 0.5%;
+    margin-right: 0.5%;
     right: 0;
+
+}
+#priority_filter{
+  background: #f15033;
+  height: 100%;;
+}
+
+#edit_icon{
+  margin-left:1%;
+  display: inline;
+  float: left;
+}
+#delete_icon{
+  margin-right: 5%;
+    display: inline;
+  float: left;
 }
 
 button {
@@ -182,7 +233,7 @@ button {
   border-radius: 12px;
   cursor: pointer;
   border: none;
-  color: white;
+  color: black;
   padding: 7px 20px;
   text-align: center;
   text-decoration: none;
@@ -191,14 +242,65 @@ button {
 }
 
 .button2 {
-  background-color:rgb(113, 192, 105)
+  background-color: rgb(243, 243, 84)
   } /* Blue */
 .button2:hover{
     background-color:rgb(197, 206, 195)
 
 }
 
-.button3 {background-color:#eb3b3b} /* Red */
+.button3 {
+  background-color:#ffff;
+  border-radius: 20px;
+  border: 2px solid #f15033;
+  width: 50%;
+
+  } /* Red */
+.button3edit {
+  background-color:#ffff;
+  border-radius: 20px;
+  width: 50%;
+  border: 2px solid #41b883;
+
+  } 
+.button3edit:hover {
+  background-color:#41b883;
+  border-radius: 20px;
+  width: 50%;
+  border: 2px solid #ffffff;
+
+  } 
+.editsmall{
+  color: #41b883;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+}
+.editsmall:hover{
+  color: #ffffff;
+}
+
+.deletesmall{
+  color: #f15033;
+    font-weight: bold;
+
+}
+.deletesmall:hover{
+  color: white
+}
+.button3delte {
+  background-color:#ffff;
+  border-radius: 20px;
+  border: 2px solid #f15033;
+  width: 50%;
+} 
+.button3delte:hover {
+  background-color:#f15033;
+  border-radius: 20px;
+  border: 2px solid #ffffff;
+  width: 50%;
+} 
+
 
 .button3:hover{
   background-color:rgb(235, 173, 173);
@@ -238,7 +340,7 @@ button {
 
 
 .container input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: #41b883
 }
 
 .checkmark:after {
@@ -263,10 +365,21 @@ button {
   transform: rotate(45deg);
 }
 
+#flame_icon{
+  margin-left: -95%;
+  cursor: pointer;
+  height: 95%;
+}
+
 
 @media (max-width: 500px) {
   .todos {
     grid-template-columns: 1fr;
   }
+  #flame_icon{
+  margin-left: -80%;
+  cursor: pointer;
+  height: 95%;
+}
 }
 </style>
